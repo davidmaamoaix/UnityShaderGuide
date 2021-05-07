@@ -12,7 +12,7 @@ Our first shader is very simple; it just changes the color of objects over time:
 
 The code you need to understand is located in [ColorChangingShader.shader](ColorChangingShader.shader).
 
-Once you have written a shader, it is time to associate it to a [Material](https://docs.unity3d.com/Manual/Materials.html). Create a new material and change its shader to the one you just created in the shader drop-down:
+Once you have written the shader, it is time to associate it to a [Material](https://docs.unity3d.com/Manual/Materials.html). Create a new material and change its shader to the one you just created in the shader drop-down:
 
 ![shader_menu](/DemoImages/1.0.1.png)
 
