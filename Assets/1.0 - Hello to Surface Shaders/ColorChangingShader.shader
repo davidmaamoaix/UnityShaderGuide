@@ -55,7 +55,10 @@ Shader "Surface/ColorChangingShader" {
         */
         struct Input {
         
-            // currently unused
+            /*
+                Stores the UV coordinate of the current 'pixel'. This is
+                currently unused.
+            */
             float2 uv_MainTex;
         };
         
@@ -74,7 +77,13 @@ Shader "Surface/ColorChangingShader" {
                 '_Time' is a float4 variable storing the current time since
                 level load.
                 
-                The 4 elements are (time / 20, time, time * 2, time * 3);
+                The 4 elements are (time / 20, time, time * 2, time * 3).
+                
+                By applying the 'sin' function, a value that gradually changes
+                betweem [-1, 1] is obtained. Divide it by 2 and add 0.5 to
+                obtain a shifting value in the range [0, 1]. Note that RGB
+                values are in the range [0, 1], where (1, 1, 1) is white and
+                (0, 0, 0) is black.
                 
                 A list of built-in variables can be found in the documentation:
                 https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
