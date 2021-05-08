@@ -88,15 +88,15 @@ Shader "Surface/ColorChangingShader" {
                 A list of built-in variables can be found in the documentation:
                 https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
             */
-            fixed red = sin(_Time.y) / 2 + 0.5;
-            fixed green = sin(_Time.y * 2) / 2 + 0.5;
-            fixed blue = sin(_Time.y * 3) / 2 + 0.5;
+            float red = sin(_Time.y) / 2 + 0.5;
+            float green = sin(_Time.y * 2) / 2 + 0.5;
+            float blue = sin(_Time.y * 3) / 2 + 0.5;
             
             /*
                 Packing the color values into one tensor, and pass to the output
                 variable.
             */
-            fixed4 color = fixed4(red, green, blue, 1);
+            float4 color = float4(red, green, blue, 1);
             
             /*
                 'SurfaceOutputStandard.Albedo' refers to the color of the
