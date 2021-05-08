@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 417381682}
   - component: {fileID: 417381681}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Brick Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 549cf690b6f82464aa1c4187d60c6c54, type: 2}
+  - {fileID: 2100000, guid: f9f67293bfce34479a1b797bdd3615d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
