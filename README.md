@@ -6,7 +6,9 @@ Writing shaders can be intimidating to beginners. This guide aims to serve as a 
 
 This guide covers the fundamentals of surface shaders, vertex & fragment shaders, and compute shaders. You will start with a simple, color-changing sphere, and build your way up to creating more complicated shaders such as ray-tracing and fractals.
 
-The code in this guide are aimed to be clear and instructional, and might not be optimized. Optimizing the code will be up to you.
+Note that the code in this guide are aimed to be clear and instructional, and might not be optimized.
+
+Feel free to download this repo and open it in Unity to try out the shaders.
 
 ## Table of Content
 
