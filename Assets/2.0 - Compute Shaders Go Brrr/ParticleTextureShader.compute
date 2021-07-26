@@ -3,10 +3,22 @@
 */
 #pragma kernel CSMain
 
+/*
+    Define an data structure to store per-particle information.
+*/
+struct Particle {
+    float2 velocity;
+};
+
 RWTexture2D<float4> Result;
 
+/*
+    'numthreads' defines the number of threads fired in a group.
+    The axes provide a multi-dimension grid, and the location of each point
+    is passed in to each thread.
+*/
 [numthreads(64, 1, 1)]
-void CSMain (uint3 id: SV_DispatchThreadID) {
+void CSMain(uint3 id: SV_DispatchThreadID) {
     
     Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
 }
