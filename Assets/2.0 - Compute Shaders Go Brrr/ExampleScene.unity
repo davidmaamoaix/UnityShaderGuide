@@ -147,7 +147,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -315,6 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954b2ac88dceb4eadb2c9646f406582e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shader: {fileID: 7200000, guid: 34e5eb81cc5284aca83799b0bc703a7e, type: 3}
+  _size: 256
 --- !u!1 &1415949245
 GameObject:
   m_ObjectHideFlags: 0

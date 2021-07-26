@@ -1,13 +1,18 @@
 ﻿/*
     Each kernel compiles to a function on the GPU that is ran per thread.
 */
-#pragma kernel CSMain
+#pragma kernel ClearBoard
+
+int BoardSize;
+int Random;
+float DeltaTime;
 
 /*
     Define an data structure to store per-particle information.
 */
 struct Particle {
-    float2 velocity;
+    float2 pos;
+    float2 dir;
 };
 
 RWTexture2D<float4> Result;
@@ -17,8 +22,11 @@ RWTexture2D<float4> Result;
     The axes provide a multi-dimension grid, and the location of each point
     is passed in to each thread.
 */
-[numthreads(64, 1, 1)]
-void CSMain(uint3 id: SV_DispatchThreadID) {
+[numthreads(8, 8, 1)]
+void ClearBoard(uint3 id: SV_DispatchThreadID) {
+    float xColor = 1 - clamp(0, 1, ceil(fmod(id.x, 32)));
+    float yColor = 1 - clamp(0, 1, ceil(fmod(id.y, 32)));
     
-    Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+    float color = xColor + yColor;
+    Result[id.xy] = float4(color, color, color, 0);
 }

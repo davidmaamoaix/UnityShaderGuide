@@ -26,6 +26,11 @@ public class RenderTextureScript: MonoBehaviour {
     }
 
     void Update() {
-        
+        int kernel = _shader.FindKernel("ClearBoard");
+
+        _shader.SetTexture(kernel, "Result", _texture);
+        _shader.Dispatch(kernel, _size / 8, _size / 8, 1);
+
+        _renderer.material.SetTexture("_MainTex", _texture);
     }
 }
