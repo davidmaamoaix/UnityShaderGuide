@@ -6,4 +6,4 @@ In this chapter we are going to simulate a bunch of particles bouncing around on
 
 In essence, the GPU is good at processing multiple things at the same time (this is an extremely simplified depiction of GPU parallellism, but too much details at once might be confusing). This is why computer graphics, gaming and machine learning often utilize GPU computing for their superior efficiency at computing parallelable computations, such as vector math.
 
-The short version of how GPU works is that it operates in groups of threads (called wavefront). Each wavefront carries a bunch of threads (usually either `32` or `64`), which must carry out __the exact same instructions__ (which is obviously very different from how the CPU works).
+The short version of how GPU works is that it operates in groups of threads (called wavefront). Each wavefront carries a bunch of threads (usually either `32` or `64`), which must carry out __the exact same instructions__ (which is obviously very different from how the CPU works). Different thread holds different information, and is commonly used to carry out vertex/pixel calculations in a mesh/texture.
