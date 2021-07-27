@@ -2,6 +2,7 @@
     Each kernel compiles to a function on the GPU that is ran per thread.
 */
 #pragma kernel ClearBoard
+#pragma kernel RunParticle
 
 int BoardSize;
 int Random;
@@ -15,6 +16,12 @@ struct Particle {
     float2 dir;
 };
 
+RWStructuredBuffer<Particle> ParticleBuffer;
+
+/*
+    The output texture to write to.
+    This shares memory with the RenderTexture created in C# script earlier.
+*/
 RWTexture2D<float4> Result;
 
 /*
@@ -24,9 +31,43 @@ RWTexture2D<float4> Result;
 */
 [numthreads(8, 8, 1)]
 void ClearBoard(uint3 id: SV_DispatchThreadID) {
-    float xColor = 1 - clamp(0, 1, ceil(fmod(id.x, 32)));
-    float yColor = 1 - clamp(0, 1, ceil(fmod(id.y, 32)));
+    float xColor = 1 - clamp(0, 1, fmod(id.x, 32));
+    float yColor = 1 - clamp(0, 1, fmod(id.y, 32));
     
     float color = xColor + yColor;
     Result[id.xy] = float4(color, color, color, 0);
+}
+
+/*
+    Single dimension since there is no geometric relationship between
+    particles - they are all in a list!
+*/
+[numthreads(16, 1, 1)]
+void RunParticle(uint3 id: SV_DispatchThreadID) {
+    Particle particle = ParticleBuffer[id.x];
+    
+    particle.pos+= particle.dir;
+    
+    /*
+        Checks for boundaries and bounces the particle back. Note that branches
+        in shader code are not optimal.
+    */
+    if (particle.pos.x < 0) {
+        particle.pos.x = 0 - particle.pos.x; // brings the offset in
+        particle.dir.x *= -1;
+    } else if (particle.pos.x > BoardSize) {
+        particle.pos.x = BoardSize * 2 - particle.pos.x;
+        particle.dir.x *= -1;
+    }
+    
+    if (particle.pos.y < 0) {
+        particle.pos.y = 0 - particle.pos.y; // brings the offset in
+        particle.dir.y *= -1;
+    } else if (particle.pos.y > BoardSize) {
+        particle.pos.y = BoardSize * 2 - particle.pos.y;
+        particle.dir.y *= -1;
+    }
+    
+    ParticleBuffer[id.x] = particle;
+    Result[particle.pos] = float4(1, 0, 0, 0);
 }
