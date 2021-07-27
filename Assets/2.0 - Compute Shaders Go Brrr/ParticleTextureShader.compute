@@ -5,7 +5,6 @@
 #pragma kernel RunParticle
 
 int BoardSize;
-int Random;
 float DeltaTime;
 
 /*
@@ -46,7 +45,7 @@ void ClearBoard(uint3 id: SV_DispatchThreadID) {
 void RunParticle(uint3 id: SV_DispatchThreadID) {
     Particle particle = ParticleBuffer[id.x];
     
-    particle.pos+= particle.dir;
+    particle.pos += particle.dir * DeltaTime;
     
     /*
         Checks for boundaries and bounces the particle back. Note that branches
@@ -68,6 +67,10 @@ void RunParticle(uint3 id: SV_DispatchThreadID) {
         particle.dir.y *= -1;
     }
     
+    /*
+        Updates the particle data back into the buffer and draws the particle on
+        the resulting texture.
+    */
     ParticleBuffer[id.x] = particle;
-    Result[particle.pos] = float4(1, 0, 0, 0);
+    Result[particle.pos] = float4(1, 1, 1, 0);
 }
